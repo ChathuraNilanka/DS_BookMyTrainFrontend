@@ -1,0 +1,20 @@
+<nav class="navbar navbar-default">
+  <div class="navbar-header">
+    <a href="#/"><img src="assets/angular.png" class="logo" /></a>
+  </div>
+  <ul class="nav navbar-nav nav-pills">
+    <li routerLinkActive="active">
+      <a routerLink="/home">Home</a>
+    </li>
+    <li routerLinkActive="active">
+      <a routerLink="/bookTrain">Book a Train</a>
+    </li>
+    <li routerLinkActive="active">
+      <a routerLink="/second-page">View Schedule</a>
+    </li>
+  </ul>
+</nav>
+
+<main>
+  <router-outlet></router-outlet>
+</main>
