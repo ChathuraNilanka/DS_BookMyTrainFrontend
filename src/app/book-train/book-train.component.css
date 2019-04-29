@@ -1,0 +1,49 @@
+
+
+.container {
+  margin-top: 20px;
+  background-color: bisque;
+  border-radius: 15px;
+}
+
+.main-heading {
+  text-transform: uppercase;
+  margin: 0 0 20px 0;
+}
+
+mat-card {
+  margin: 0 0 20px 0;
+
+}
+
+    code {
+      position: absolute;
+      top: 11px;
+      right: 0;
+      float: right;
+      font-size: 10px;
+    }
+
+  mat-card-subtitle {
+    min-height: 60px;
+  }
+
+
+
+a[mat-icon-button] {
+    position: relative;
+    left: 5px;
+  }
+
+  .row-align-items-end{
+      background-color: burlywood;
+  }
+
+  button{
+      color: rgb(181, 231, 233);
+      border-radius: 7px;
+      align-content: center;
+      background-color: darkolivegreen;
+  }
+
+  

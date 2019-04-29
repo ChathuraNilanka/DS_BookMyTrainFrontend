@@ -1,3 +1,30 @@
-<p>
-  book-train works!
-</p>
+<div class="main-div">
+  <div class="side-div">
+    
+  </div>
+  <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 rtl class="main-heading">Trains</h1>
+        </div>
+      </div>
+      <div class="row-align-items-end">
+        <div *ngFor="let train of trains" class="col-md-6 col-lg-4" >
+          <mat-card class="row-align-items-end">
+            <mat-card-title>
+              <code >{{ train.mainRoute }}</code>
+            </mat-card-title>
+            <mat-card-subtitle rtl>
+              {{ train.route }}
+            </mat-card-subtitle>
+            <mat-card-actions>
+              Ticket Price: Rs.{{train.price}}.00<br/>
+              <br/>
+              <span><button type="submit" onclick="" >Book Now</button></span>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+</div>
+
