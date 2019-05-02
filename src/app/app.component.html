@@ -9,12 +9,12 @@
     <li routerLinkActive="active">
       <a routerLink="/bookTrain">Book a Train</a>
     </li>
-    <li routerLinkActive="active">
-        <a routerLink="/home">Login</a>
-      </li>
-      <li routerLinkActive="active">
-          <a routerLink="/home">Signup</a>
-        </li>
+    <li *ngIf="userDetails == null" routerLinkActive="active">
+        <a routerLink="/login">Login</a>
+    </li>
+    <li>
+      <button *ngIf="userDetails != null" (click)="logout()">Logout</button>
+    </li>
   </ul>
 </nav>
 

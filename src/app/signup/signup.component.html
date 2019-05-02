@@ -1,0 +1,18 @@
+<div class="signup-page">
+  <div class="form">
+    <form class="login-form">
+      <input type="text" placeholder="email" [(ngModel)]="email" [ngModelOptions]="{standalone: true}"/>
+      <input type="password" placeholder="password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}"/>
+      <input type="text" placeholder="phone number" [(ngModel)]="phone_number" [ngModelOptions]="{standalone: true}"/>
+      <input type="text" placeholder="NIC number" [(ngModel)]="nic" [ngModelOptions]="{standalone: true}"/>
+      <button (click)="signup()">Create Account </button>
+      <p class="message">Already registered? <a routerLink="/login">Sign In</a></p>
+    </form>
+    <!-- <form class="login-form">
+      <input type="text" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" placeholder="email" required/>
+      <input type="password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}" placeholder="password" required/>
+      <button (click)="login()">login</button>
+      <p class="message">Not registered? <a routerLink="/home">Create an account</a></p>
+    </form> -->
+  </div>
+</div>
