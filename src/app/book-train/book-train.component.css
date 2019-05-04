@@ -39,11 +39,13 @@ a[mat-icon-button] {
       background-color: burlywood;
   }
 
-  button{
+  /* button{
       color: rgb(181, 231, 233);
       border-radius: 7px;
       align-content: center;
       background-color: darkolivegreen;
-  }
-
+  } */
+.imgdiv{
+  align-content: center;
+}
   

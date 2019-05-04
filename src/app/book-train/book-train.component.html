@@ -12,19 +12,72 @@
         <div *ngFor="let train of trains" class="col-md-6 col-lg-4" >
           <mat-card class="row-align-items-end">
             <mat-card-title>
-              <code >{{ train.mainRoute }}</code>
+              {{ train.route }}
             </mat-card-title>
             <mat-card-subtitle rtl>
-              {{ train.route }}
+              <img src={{train.imgUrl}}>
+              
             </mat-card-subtitle>
             <mat-card-actions>
-              Ticket Price: Rs.{{train.price}}.00<br/>
-              <br/>
-              <span><button type="submit" onclick="" >Book Now</button></span>
+              <button pButton type="button" (click)="openPage(train)" label="Book Now" class="ui-button-raised ui-button-success"></button>
             </mat-card-actions>
+
+              <!-- <p-dialog header="Book Now" [(visible)]="display" [modal]="true" [responsive]="true" [style]="{width: '450px', minWidth: '400px'}" [minY]="150" [maximizable]="true" [baseZIndex]="10000">
+                <ul>
+                  <li>
+                      <h6>Select Date</h6>
+                      <p-calendar [(ngModel)]="date" [showIcon]="true"></p-calendar>
+                  </li>
+                  <li>
+                      <p-dropdown [options]=train.time [(ngModel)]="time" placeholder="Select a Time" optionLabel="name" [showClear]="true"></p-dropdown>
+                  </li>
+                  <li>
+                      <p-dropdown [options]="cities" [(ngModel)]="time" placeholder="Select Classs" optionLabel="name" [showClear]="true"></p-dropdown>
+                  </li> 
+                  <li>
+                      <h6 class="first">Enter Number of Tickets</h6>
+                      <input id="input" type="number" size="30" pInputText [(ngModel)]="numberOfTickets"> 
+                      
+                  </li>
+                    
+                </ul>
+              <p-footer>
+                <button type="button" pButton icon="pi pi-check" *ngIf="buttonStatus == true" (click)="confirmBook()" label="Confirm" class="ui-button-raised ui-button-success"></button>
+                <button type="button" pButton icon="pi pi-close" (click)="display=false" label="Cancel" class="ui-button-secondary"></button>
+              </p-footer>
+            </p-dialog> -->
           </mat-card>
         </div>
       </div>
     </div>
 </div>
+
+<!-- <p-dialog header="Book Now" [(visible)]="display" [modal]="true" [responsive]="true" [style]="{width: '450px', minWidth: '400px'}" [minY]="150" 
+        [maximizable]="true" [baseZIndex]="10000">
+        <ul>
+          <li>
+              <h6>Select Date</h6>
+              <p-calendar [(ngModel)]="date" [showIcon]="true"></p-calendar>
+          </li>
+          <li>
+              <p-dropdown [options]=train [(ngModel)]="time" placeholder="Select a Time" optionLabel="name" [showClear]="true"></p-dropdown>
+          </li>
+          <li>
+              <p-dropdown [options]="cities" [(ngModel)]="time" placeholder="Select Classs" optionLabel="name" [showClear]="true"></p-dropdown>
+          </li> 
+          <li>
+              <h6 class="first">Enter Number of Tickets</h6>
+              <input id="input" type="number" size="30" pInputText [(ngModel)]="numberOfTickets"> 
+              
+          </li>
+            
+        </ul>
+
+        
+    
+  <p-footer>
+    <button type="button" pButton icon="pi pi-check" *ngIf="buttonStatus == true" (click)="confirmBook()" label="Confirm" class="ui-button-raised ui-button-success"></button>
+    <button type="button" pButton icon="pi pi-close" (click)="display=false" label="Cancel" class="ui-button-secondary"></button>
+  </p-footer>
+</p-dialog> -->
 

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
+
 
 import { TrainService } from '../../services/book-train/train.service';
 
@@ -15,12 +16,30 @@ export class BookTrainComponent implements OnInit {
   public trains: any;
   date: any
   userDetails: any;
+  buttonStatus: boolean = true;
+  
 
   constructor(public http: HttpClient, public trainService: TrainService, private router: Router) { 
     this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
     if(this.userDetails == null || this.userDetails == undefined){
       this.router.navigateByUrl('login');
     }
+  }
+
+  openPage(data: any) {
+
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+          "data": JSON.stringify(data),
+      }
+    };
+    this.router.navigate(["makePayment"], navigationExtras);
+    console.log(data, "data");
+  }
+
+  confirmBook(){
+    console.log("confirmBook()");
+    this.buttonStatus = false;
   }
   
 
@@ -30,11 +49,10 @@ export class BookTrainComponent implements OnInit {
     if(this.userDetails == null || this.userDetails == undefined){
       this.router.navigateByUrl('login');
     }
-    // this.res = this.trainService.getTrains();
-    // console.log("res1", this.res);
+    
     this.trainService.getTrains().subscribe(
       data => {
-        this.trains = data.routes, console.log(data);
+        this.trains = data.data, console.log(data.data);
       },
       error => {
         console.log(error);

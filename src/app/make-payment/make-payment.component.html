@@ -1,0 +1,48 @@
+<div class="checkout">
+    <div class="form">
+      <form class="login-form">
+          <p-calendar [(ngModel)]="date" [showIcon]="true"  placeholder="Select Date" [(ngModel)]="date" [ngModelOptions]="{standalone: true}" ></p-calendar>
+
+          <p-dropdown [options]="times" [(ngModel)]="time" placeholder="Select a Time"  [ngModelOptions]="{standalone: true}"></p-dropdown>
+
+          <p-dropdown [options]="classes" [(ngModel)]="class" placeholder="Select Classs" [ngModelOptions]="{standalone: true}"></p-dropdown>
+          
+          <input id="input" type="number"  placeholder="Select Number of Tickets" size="30" pInputText [(ngModel)]="numberOfTickets" [ngModelOptions]="{standalone: true}">
+
+          <div class="ui-g-12">
+            <h5>Employee Status :</h5>
+            <h5 *ngIf="userDetails.user_type == 'gov'"><b>Government Employee</b>(10% Discount)</h5>
+            <h5 *ngIf="userDetails.user_type == 'non_gov'"><b>Non Government Employee</b></h5>
+          </div>
+
+          <div class="ui-g" style="width:250px;margin-bottom:10px">
+              <h5><b>Payment Method</b> </h5>
+              <div class="ui-g-12"><p-radioButton name="group1" value="card" label="Credit Card" [(ngModel)]="paymentType" inputId="opt1"></p-radioButton></div>
+              <div class="ui-g-12"><p-radioButton name="group1" value="dialog" label="Dialog Account" [(ngModel)]="paymentType" inputId="opt2"></p-radioButton></div>
+          </div>
+
+          <button (click)="checkout()">Checkout </button>
+      </form>
+    </div>
+  </div>
+
+  <p-dialog header="Enter Payment Detils" [(visible)]="display" [modal]="true" [responsive]="true" [style]="{width: '350px', minWidth: '200px'}" [minY]="70" [baseZIndex]="10000">
+    <h6><b>Total Ticket Price: {{totalCharge}}.00</b></h6>    
+        <form class="login-form" *ngIf="paymentType == 'card'">
+          <h6>Enter Card Details</h6>
+          <input type="text" pInputText placeholder="Card Number" [(ngModel)]="cardDetails.cardNumber" [ngModelOptions]="{standalone: true}"/>
+          <h6><b>Amount : {{totalCharge}}.00</b></h6>
+          <input type="text" pInputText placeholder="CVC Number" [(ngModel)]="cardDetails.cvcNumber" [ngModelOptions]="{standalone: true}"/>
+          <input type="text" pInputText placeholder="Card Holder Name" [(ngModel)]="cardDetails.name" [ngModelOptions]="{standalone: true}"/>
+        </form>
+        <form class="login-form" *ngIf="paymentType == 'dialog'">
+            <h6>Enter Bill Details</h6>
+            <input type="text" pInputText placeholder="Mobile Number" [(ngModel)]="dialogDetails.number" [ngModelOptions]="{standalone: true}"/>
+            <input type="text" pInputText placeholder="Pin Number" [(ngModel)]="dialogDetails.pin" [ngModelOptions]="{standalone: true}"/>
+            <h6><b>Amount : {{totalCharge}}.00</b></h6>
+          </form>
+    <p-footer>
+      <button type="button" pButton icon="pi pi-check" (click)="confirmPayment()" label="Confirm" class="ui-button-raised ui-button-success"></button>
+      <button type="button" pButton icon="pi pi-close" (click)="display=false" label="Cancel" class="ui-button-secondary"></button>
+    </p-footer>
+  </p-dialog>

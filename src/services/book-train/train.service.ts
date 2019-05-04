@@ -9,7 +9,7 @@ export class TrainService {
 
   res:any;
 
-  private baseUrl:any = 'http://localhost:8080/trainApp/route/all/Colombo-Kandy';
+  private baseUrl:any = 'http://localhost:8080/trainApp/trains/all';
 
   constructor(public http: HttpClient) { }
 
