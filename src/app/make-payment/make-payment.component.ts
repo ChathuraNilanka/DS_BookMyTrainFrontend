@@ -13,13 +13,13 @@ export class MakePaymentComponent implements OnInit {
   trainDetails: any
   times: any;
   classes: any;
-  train: any;
+  train: any = null;
   userDetails: any;
-  date: any;
-  time: String;
-  class: number;
-  paymentType: String;
-  numberOfTickets: number;
+  date: any = null;
+  time: String = null;
+  class: number = null;
+  paymentType: String = null;
+  numberOfTickets: number = null;
   display: boolean = false;
   totalCharge: number;
   cardDetails: any={
@@ -60,11 +60,11 @@ export class MakePaymentComponent implements OnInit {
   }
 
   initNullValues(){
-    this.cardDetails.cardNumber ="";
-    this.cardDetails.cvcNumber ="";
-    this.cardDetails.name ="";
-    this.dialogDetails.number ="";
-    this.dialogDetails.pin = "";
+    this.cardDetails.cardNumber = null;
+    this.cardDetails.cvcNumber = null;
+    this.cardDetails.name = null;
+    this.dialogDetails.number = null;
+    this.dialogDetails.pin = null;
   }
 
   getTimes(){
@@ -83,52 +83,90 @@ export class MakePaymentComponent implements OnInit {
   }
 
   checkout() {
-    this.display = true;
-    console.log(this.paymentType);
+    if(this.date == null || this.time == null || this.class == null || this.numberOfTickets == null || this.paymentType == null){
+      alert('One or more fields empty');
+    }else{
+      this.display = true;
+      console.log(this.paymentType);
 
-    if(this.userDetails.user_type == 'gov'){
-      this.totalCharge = (this.numberOfTickets * this.class)*90 /100;
-      console.log(this.totalCharge);
+      if(this.userDetails.user_type == 'gov'){
+        this.totalCharge = (this.numberOfTickets * this.class)*90 /100;
+        console.log(this.totalCharge);
+      }
+      if(this.userDetails.user_type == 'non_gov'){
+        this.totalCharge = this.numberOfTickets * this.class
+        console.log(this.totalCharge);
+      }
     }
-    if(this.userDetails.user_type == 'non_gov'){
-      this.totalCharge = this.numberOfTickets * this.class
-      console.log(this.totalCharge);
-    }
+    
   }
 
   confirmPayment(){
     console.log("confirmPayment",this.cardDetails);
     console.log("dialogDetails",this.dialogDetails);
 
-    let body = {
-      "uId": this.userDetails._id,
-      "route": this.trainDetails.route,
-      "nTickets": this.numberOfTickets,
-      "amount": this.totalCharge,
-      "time": this.time,
-      "type": this.paymentType,
-      "date": this.date,
-      "mail": this.userDetails.email,
-      "phone": this.userDetails.phone_number
-    };
-
     if(this.paymentType == "card"){
-      this.makePayment.cardPayment(body).subscribe(
-        data => {
-          this.paymentResp = data, console.log(data);
-          if(this.paymentResp.message == "New payment added!"){
-            this.router.navigateByUrl('bookTrain');
-          }
-        });
+      if(this.cardDetails.cardNumber == null || this.cardDetails.cvcNumber == null || this.cardDetails.name == null){
+        alert('One or more fields empty');
+      }else{
+        let body = {
+          "uId": this.userDetails._id,
+          "route": this.trainDetails.route,
+          "nTickets": this.numberOfTickets,
+          "amount": this.totalCharge,
+          "time": this.time,
+          "type": this.paymentType,
+          "date": this.date,
+          "mail": this.userDetails.email,
+          "phone": this.userDetails.phone_number,
+          "cardNumber": this.cardDetails.cardNumber,
+          "cvc": this.cardDetails.cvcNumber,
+          "name": this.cardDetails.name
+        };
+        this.makePayment.cardPayment(body).subscribe(
+          data => {
+            this.paymentResp = data, console.log(data);
+            if(this.paymentResp.message == "New payment added!"){
+              alert('Your payment is payed by Credit card');
+              this.router.navigateByUrl('bookTrain');
+            }
+            if(this.paymentResp.message == "failed!"){
+              alert('Please enter correct payment details');
+            }
+          });
+      }
+      
     }
     if(this.paymentType == "dialog"){
-      this.makePayment.mobilePayment(body).subscribe(
-        data => {
-          this.paymentResp = data, console.log(data);
-          if(this.paymentResp.message == "New payment added!"){
-            this.router.navigateByUrl('bookTrain');
-          }
-        });
+      if(this.dialogDetails.number == null || this.dialogDetails.pin == null){
+        alert('One or more fields empty');
+      }else{
+        let body = {
+          "uId": this.userDetails._id,
+          "route": this.trainDetails.route,
+          "nTickets": this.numberOfTickets,
+          "amount": this.totalCharge,
+          "time": this.time,
+          "type": this.paymentType,
+          "date": this.date,
+          "mail": this.userDetails.email,
+          "phone": this.userDetails.phone_number,
+          "dialogNumber": this.dialogDetails.number,
+          "pin": this.dialogDetails.pin
+        };
+        this.makePayment.mobilePayment(body).subscribe(
+          data => {
+            this.paymentResp = data, console.log(data);
+            if(this.paymentResp.message == "New payment added!"){
+              alert('Your payment is added to the Dialog bill!');
+              this.router.navigateByUrl('bookTrain');
+            }
+            if(this.paymentResp.message == "failed!"){
+              alert('Please enter correct payment details');
+            }
+          });
+      }
+      
     }
   }
 

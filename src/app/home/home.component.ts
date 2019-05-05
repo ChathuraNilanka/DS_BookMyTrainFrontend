@@ -12,9 +12,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.imagesUrl = [
-      'assets/download.jpg',
-      'assets/images.jpg',
-      'assets/tips-on-budget-Train-travel-in-Sri-Lanka.jpg',
+      'assets/train1.jpg',
+      'assets/train2.jpg',
+      'assets/train3.jpg',
+      'assets/train4.jpg',
       ];
   }
 

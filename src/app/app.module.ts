@@ -14,6 +14,7 @@ import {DropdownModule} from 'primeng/dropdown';
 import {CalendarModule} from 'primeng/calendar';
 import {InputTextModule} from 'primeng/inputtext';
 import {RadioButtonModule} from 'primeng/radiobutton';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 import {SlideshowModule} from 'ng-simple-slideshow';
@@ -55,7 +56,8 @@ import { MakePaymentComponent } from './make-payment/make-payment.component';
     DropdownModule,
     CalendarModule,
     InputTextModule,
-    RadioButtonModule
+    RadioButtonModule,
+    ReactiveFormsModule
   ],
   providers: [
     TrainService

@@ -18,6 +18,10 @@ export class SignupComponent implements OnInit {
   constructor(public loginsignup: LoginSignupService, private router: Router) { }
 
   ngOnInit() {
+    this.email = null;
+    this.password = null;
+    this.nic = null;
+    this.phone_number = null;
   }
 
   signup(){
@@ -27,14 +31,18 @@ export class SignupComponent implements OnInit {
       "mobile": this.phone_number,
       "nic": this.nic
     }
-
-    this.loginsignup.signup(body).subscribe(
-      data => {
-        this.resp = data, console.log(data.message);
-        if(this.resp.message == "New user added!"){
-          this.router.navigateByUrl('home');
-        }
+    if(this.email == null || this.password == null || this.nic == null || this.phone_number == null){
+      alert('One or more fields empty');
+    }else{
+      this.loginsignup.signup(body).subscribe(
+        data => {
+          this.resp = data, console.log(data.message);
+          if(this.resp.message == "New user added!"){
+            this.router.navigateByUrl('home');
+          }
       });
+    }
+    
 
   }
 

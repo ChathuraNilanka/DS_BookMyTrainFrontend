@@ -1,13 +1,14 @@
 <div class="checkout">
     <div class="form">
       <form class="login-form">
-          <p-calendar [(ngModel)]="date" [showIcon]="true"  placeholder="Select Date" [(ngModel)]="date" [ngModelOptions]="{standalone: true}" ></p-calendar>
+          <h4><b>Book Now</b></h4>  
+          <p-calendar [(ngModel)]="date" [showIcon]="true"  placeholder="Select Date" [(ngModel)]="date" [ngModelOptions]="{standalone: true}" required ></p-calendar>
 
           <p-dropdown [options]="times" [(ngModel)]="time" placeholder="Select a Time"  [ngModelOptions]="{standalone: true}"></p-dropdown>
 
           <p-dropdown [options]="classes" [(ngModel)]="class" placeholder="Select Classs" [ngModelOptions]="{standalone: true}"></p-dropdown>
           
-          <input id="input" type="number"  placeholder="Select Number of Tickets" size="30" pInputText [(ngModel)]="numberOfTickets" [ngModelOptions]="{standalone: true}">
+          <input id="input" type="number"  placeholder="Select Number of Tickets" size="30" pInputText [(ngModel)]="numberOfTickets" [ngModelOptions]="{standalone: true}" required>
 
           <div class="ui-g-12">
             <h5>Employee Status :</h5>
