@@ -20,36 +20,37 @@ export class BookTrainComponent implements OnInit {
   
 
   constructor(public http: HttpClient, public trainService: TrainService, private router: Router) { 
-    this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
-    if(this.userDetails == null || this.userDetails == undefined){
-      this.router.navigateByUrl('login');
-    }
   }
 
+  //Navigating method for makePayment page
   openPage(data: any) {
-
     let navigationExtras: NavigationExtras = {
       queryParams: {
           "data": JSON.stringify(data),
       }
     };
-    this.router.navigate(["makePayment"], navigationExtras);
+    this.router.navigate(["makePayment"], navigationExtras); //navigate to payment page with  selected train details
     console.log(data, "data");
   }
 
-  confirmBook(){
-    console.log("confirmBook()");
-    this.buttonStatus = false;
-  }
-  
-
   ngOnInit() {
     console.log(localStorage.getItem('userDetails'));
-    this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
+    this.getUserDetails();
+    this.getTrains(); 
+  }
+
+  //Checking if user loged or not
+  getUserDetails(){
+    this.userDetails = JSON.parse(localStorage.getItem('userDetails')); //get the user's data from local storage
     if(this.userDetails == null || this.userDetails == undefined){
-      this.router.navigateByUrl('login');
+      this.router.navigateByUrl('login'); // navigate to login page
     }
-    
+    console.log(this.userDetails);
+  }
+
+  //get the train details
+  getTrains(){
+    //calling train service method for display train details
     this.trainService.getTrains().subscribe(
       data => {
         this.trains = data.data, console.log(data.data);
@@ -57,7 +58,7 @@ export class BookTrainComponent implements OnInit {
       error => {
         console.log(error);
       }
-    ) ; 
+    ) ;
   }
 
 }

@@ -26,21 +26,24 @@ export class LoginComponent implements OnInit {
 
   login(){
     console.log(this.email, this.password);
-    if(this.email == null || this.password == null){
+    
+    if(this.email == null || this.password == null){ //validate form details
       alert('One or more fields empty');
     }else{
+      //call the loginSignup service and get the user details
       this.loginsignup.login(this.email, this.password).subscribe(
         data => {
           this.resp = data.users[0], console.log(data.users[0]);
           this.length = data.users.length;
-  
+          //validate login details using api response
           if(this.length == 0){
+            //navigate the user if login details incorrect
             console.log(0);
             localStorage.setItem('userDetails', null);
-            this.router.navigateByUrl('login');
-            //login error alert box
+            this.router.navigateByUrl('login'); 
           }
           if (this.length == 1){
+            //navigate the user if login details correct
             console.log(1);
             localStorage.setItem('userDetails', JSON.stringify(this.resp));
             console.log(localStorage.getItem('userDetails'));

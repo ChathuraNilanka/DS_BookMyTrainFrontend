@@ -16,7 +16,7 @@ export class AppComponent {
   constructor(private router: Router){
     this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
   }
-
+  //logout method 
   logout(){
     localStorage.setItem('userDetails', null);
     platformBrowserDynamic().bootstrapModule(AppModule)
