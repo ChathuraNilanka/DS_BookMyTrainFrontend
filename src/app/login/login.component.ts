@@ -16,7 +16,8 @@ export class LoginComponent implements OnInit {
   public email: any;
   public password: any;
   resp: any;
-  length: any
+  length: any;
+  
   constructor(public loginsignup: LoginSignupService, private router: Router) { }
 
   ngOnInit() {
@@ -40,6 +41,7 @@ export class LoginComponent implements OnInit {
             //navigate the user if login details incorrect
             console.log(0);
             localStorage.setItem('userDetails', null);
+            alert("Invalid Username or Password!")
             this.router.navigateByUrl('login'); 
           }
           if (this.length == 1){
@@ -57,9 +59,6 @@ export class LoginComponent implements OnInit {
         }
       );
     }
-    
-
-    
   }
 
 }
